@@ -39,32 +39,4 @@ public class StepsDefinition extends TestRunner {
 
 
 
-    @Given("^Users is on family portal$")
-    public void usersIsOnFamilyPortal() throws Throwable {
-
-        loginPage.verifyLoginScreen();
-    }
-
-
-
-
-    @And("^Click on Login button$")
-    public void clickOnLoginButton() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        loginPage.clickLoginButton();
-    }
-
-
-    @Then("^users is redirected to the family portal dashboard$")
-    public void usersIsRedirectedToTheFamilyPortalDashboard() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        loginPage.DashboardRedirectCheck();
-    }
-
-
-    @When("^User insert \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void userInsertAnd(String email, String password) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        loginPage.insertValidCredentials(email,password);
-    }
 }

@@ -22,50 +22,78 @@ public class LoginPage {
     }
 
 
+    @FindBy(how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.Button[2]")
+    private WebElement loginInButton;
 
-    @FindBy(how = How.XPATH, using = "//*[@id=\"login_form\"]/ul/li[1]/input")
-    private WebElement emailInput;
+    @FindBy(how = How.ID, using = "com.guzmanygomez.gyg.uat:id/rf_edit_text")
+    private WebElement emailField;
 
-    @FindBy(how = How.XPATH, using = "//*[@id=\"login_form\"]/ul/li[2]/input")
-    private WebElement passwordInput;
+    @FindBy(how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.RelativeLayout[2]/TextInputLayout/android.widget.FrameLayout/android.widget.EditText")
+    private WebElement passwordField;
 
-    @FindBy(how = How.XPATH, using = "//*[@id=\"login_button\"]/span")
-    private WebElement logInButton;
+    @FindBy(how = How.ID, using = "com.guzmanygomez.gyg.uat:id/f_start_but_login")
+    private WebElement loginButton;
 
-    @FindBy(how = How.XPATH, using = "//*[@id=\"user_switcher\"]/div/ul\n")
-    private WebElement dashboardPage;
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/dialog_tb_tv_text")
+    private WebElement loginError;
 
-    @FindBy(how = How.XPATH, using = "//*[@id=\"logout_button\"]/img")
-    private WebElement logOutButton;
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.FrameLayout[1]/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.TextView[1]")
+    private WebElement welcomeMessage;
+
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/dialog_tb_tv_text")
+    private WebElement wrongLoginDialog;
+
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/dialog_tb_but_left")
+    private WebElement wrongLoginDialogOk;
+
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/f_start_tv_forgot")
+    private WebElement forgotPasswordLink;
+
+    @FindBy (how = How.XPATH, using = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.RelativeLayout/android.widget.LinearLayout/android.widget.TextView[1]")
+    private WebElement resetPasswordScreen;
+
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/rf_edit_text")
+    private WebElement forgotPasswordEmailField;
+
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/f_fp_but_submit")
+    private WebElement submitButton;
+
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/dialog_tb_tv_text")
+    private WebElement wrongEmailDialog;
+
+    @FindBy (how = How.ID, using = "com.guzmanygomez.gyg.uat:id/dialog_tb_but_left")
+    private WebElement wrongEmailDialogOkButton;
 
 
+    public void checkLoginScreen(){
+        WebDriverWait wait = new WebDriverWait(driver,20);
+        wait.until(ExpectedConditions.visibilityOf(loginButton));
+        Assert.assertTrue(loginButton.isDisplayed());
+
+    }
+
+    public void insertValidCredentials(String email,String password){
+        Assert.assertTrue(emailField.isDisplayed());
+        emailField.clear();
+        emailField.sendKeys(email);
+        Assert.assertTrue(passwordField.isDisplayed());
+        passwordField.clear();
+        passwordField.sendKeys(password);
 
 
-    public void verifyLoginScreen(){
-      Assert.assertEquals(driver.getCurrentUrl(),"https://fp-pre.qustodio.com/");
-   }
+    }
 
-   public void insertValidCredentials(String email,String password ){
-    System.out.println(email);
-       System.out.println(password);
-    WebDriverWait wait=new WebDriverWait(driver,20);
-    wait.until(ExpectedConditions.visibilityOf(emailInput));
-    emailInput.clear();
-    emailInput.sendKeys(email);
-    passwordInput.clear();
-    passwordInput.sendKeys(password);
+    public void clickLoginButton(){
+        Assert.assertTrue(loginButton.isEnabled());
+        loginButton.click();
 
-   }
+    }
 
-   public void clickLoginButton(){
-        logInButton.click();
-   }
-
-   public void DashboardRedirectCheck() throws InterruptedException {
+    public void checkHomeScreenRedirect(){
         WebDriverWait wait=new WebDriverWait(driver,20);
-        wait.until(ExpectedConditions.visibilityOf(dashboardPage));
-        Assert.assertTrue(dashboardPage.isDisplayed());
+        wait.until(ExpectedConditions.visibilityOf(welcomeMessage));
+        Assert.assertTrue(welcomeMessage.isDisplayed());
+    }
 
-   }
 
 }

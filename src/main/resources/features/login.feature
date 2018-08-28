@@ -1,9 +1,9 @@
 Feature: Qustodio Login Test
 Scenario Outline: Login
-  Given Users is on family portal
-  When User insert "<email>" and "<password>"
+  Given User is on login screen
+  When User insert valid "<email>" and "<password>"
   And Click on Login button
-  Then users is redirected to the family portal dashboard
+  Then Users is redirected to the app home screen
 Examples:
   | email   | password |
-  | adytestare+816a@gmail.com | test123456 |
+  | adytestare+828@gmail.com | test |

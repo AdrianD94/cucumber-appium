@@ -1,40 +1,47 @@
 package Framework;
 
-
 import enums.Mobile;
+import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-/**
- * Created by casab on 11/2/2017.
- */
-public class WebBrowsers {
-    public static WebDriver getDriver(Mobile browserName) {
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class Os {
+    public static WebDriver getDriver(Mobile mobileOs) throws MalformedURLException {
         WebDriver driver = null;
 
-        switch (browserName) {
-            case CHROME:
-                System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver.exe");
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--incognito");
-                DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-                capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-                driver = new ChromeDriver(capabilities);
+        switch (mobileOs) {
+            case ANDROID:
+                DesiredCapabilities capabilities = new DesiredCapabilities();
+                capabilities.setCapability("BROWSER_NAME", "Android");
+                capabilities.setCapability("VERSION", "6.0.1");
+                capabilities.setCapability("deviceName","Xperia Z2");
+                capabilities.setCapability("platformName","Android");
+
+                capabilities.setCapability("autoGrantPermissions",true);
+                capabilities.setCapability("noReset","true");
+                capabilities.setCapability("fullReset","false");
+
+                capabilities.setCapability("appPackage", "com.guzmanygomez.gyg.uat");
+// This package name of your app (you can get it from apk info app)
+                capabilities.setCapability("appActivity","com.guzmanygomez.gyg.ui.activities.SplashActivity"); // This is Launcher activity of your app (you can get it from apk info app)
+//Create RemoteWebDriver instance and connect to the Appium server
+                //It will launch the Calculator App in Android Device using the configurations specified in Desired Capabilities
+                driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), capabilities);
+
                 break;
-            case FIREFOX:
-                System.setProperty("webdriver.gecko.driver", "src/test/resources/drivers/gekodriver.exe");
-                driver = new FirefoxDriver();
-                break;
-            case IE:
-                System.setProperty("webdriver.ie.driver", "src/test/resources/drivers/IEDriverServer.exe");
-                driver = new InternetExplorerDriver();
-                break;
+
+
+
+
             default:
-                throw new RuntimeException("Unknown browser: " + browserName);
+                throw new RuntimeException("Unknown browser: " + mobileOs);
         }
         return driver;
     }

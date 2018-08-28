@@ -1,11 +1,8 @@
 package enums;
 
-public enum Browsers {
+public enum Mobile {
 
-        CHROME,
-        FIREFOX,
-        IE,
-        OPERA,
-        EDGE
+        ANDROID,
+        IOS
 
 }

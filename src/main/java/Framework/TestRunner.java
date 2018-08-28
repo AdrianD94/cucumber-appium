@@ -1,6 +1,6 @@
 package Framework;
 import com.cucumber.listener.Reporter;
-import enums.Browsers;
+import enums.Mobile;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
@@ -9,6 +9,7 @@ import cucumber.api.testng.CucumberFeatureWrapper;
 import cucumber.api.testng.TestNGCucumberRunner;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 
@@ -34,13 +35,11 @@ public class TestRunner {
     }
 
     @BeforeMethod
-    public void setUp() throws InterruptedException {
+    public void setUp() throws InterruptedException, MalformedURLException {
 
-        driver = WebBrowsers.getDriver(Browsers.CHROME);
+        driver = Os.getDriver(Mobile.ANDROID);
 
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("https://fp-pre.qustodio.com/");
+
         //https://d1qoal4nguj436.cloudfront.net/sign-up
 
         Thread.sleep(1000);
