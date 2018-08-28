@@ -1,7 +1,7 @@
 package Framework;
 
 
-import enums.Browsers;
+import enums.Mobile;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,7 +13,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
  * Created by casab on 11/2/2017.
  */
 public class WebBrowsers {
-    public static WebDriver getDriver(Browsers browserName) {
+    public static WebDriver getDriver(Mobile browserName) {
         WebDriver driver = null;
 
         switch (browserName) {
