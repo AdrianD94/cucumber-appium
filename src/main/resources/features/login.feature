@@ -1,5 +1,5 @@
-Feature: Qustodio Login Test
-Scenario Outline: Login
+Feature: Gyg Login Test
+Scenario Outline: Login Test
   Given User is on login screen
   When User insert valid "<email>" and "<password>"
   And Click on Login button
